@@ -11,22 +11,13 @@
 		list-style-type: none;
 		border: 1px solid #ccc;
 	}
-	li > * {
-		padding: 4px;
-	}
-	li pre {
+	li div {
 		min-height: 14px;
-		margin: 0;
+		padding: 4px;
 		cursor: pointer;
 	}
-	li textarea {
-		width: 100%;
-		height: auto;
-		display: block;
-		overflow: hidden;
-		box-sizing: border-box;
-		border: none;
+	li div[contenteditable=true] {
 		background-color: lightyellow;
-		resize: none;
+		cursor: auto;
 	}
 }

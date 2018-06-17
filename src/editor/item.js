@@ -12,10 +12,6 @@ export default class Item extends Component {
 		};
 	}
 
-	resizeTf(tf) {
-		tf.rows = tf.value.split(/\n/).length;
-	}
-
 	onLabelClick = () => {
 		this.setState({ isEditing: true });
 	}
@@ -24,9 +20,8 @@ export default class Item extends Component {
 		if (ref == null)
 			return;
 
-		ref.value = this.state.value;
-		ref.select();
-		this.resizeTf(ref);
+		ref.innerHTML = this.state.value.replace(/\n/g, '<br>');
+		ref.focus();
 	}
 
 	onKeyDown = e => {
@@ -35,13 +30,9 @@ export default class Item extends Component {
 		if (e.keyCode === 13 && !e.shiftKey || cancel) {
 			this.setState({
 				isEditing: false,
-				value: cancel ? this.state.value : e.target.value
+				value: cancel ? this.state.value : e.target.innerHTML
 			});
 		}
-	}
-
-	onChange = e => {
-		this.resizeTf(e.target);
 	}
 
 	onBlur = e => {
@@ -49,11 +40,8 @@ export default class Item extends Component {
 	}
 
 	render() {
-		return <li>{this.state.isEditing ?
-			<textarea type="text" rows="1" ref={this.onTfLoad}
-				onKeyDown={this.onKeyDown} onBlur={this.onBlur}
-				onChange={this.onChange} /> :
-			<pre onClick={this.onLabelClick}>{this.state.value}</pre>}
-		</li>;
+		return <li><div ref={this.onTfLoad}
+			contentEditable={this.state.isEditing} onMouseDown={this.onLabelClick}
+			onKeyDown={this.onKeyDown} onBlur={this.onBlur} /></li>;
 	}
 }
