@@ -5,7 +5,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { argv } from 'yargs';
 
-const APP_DIR = path.resolve(__dirname, '../src');
+const SRC_DIR = path.resolve(__dirname, '../src');
 const MODULES_DIR = path.resolve(__dirname, '../node_modules');
 
 const plugins = [
@@ -27,14 +27,13 @@ if (argv.env === 'build') {
 		uglifyOptions: {
 			ie8: false
 		}
-	}),
-	new webpack.DefinePlugin({
+	}), new webpack.DefinePlugin({
 		'process.env.NODE_ENV': JSON.stringify('production')
 	}));
- }
+}
 
 const config = {
-	context: APP_DIR,
+	context: SRC_DIR,
 	entry: {
 		'app': './index.js'
 	},
@@ -45,13 +44,13 @@ const config = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx'],
-		modules: [APP_DIR, MODULES_DIR]
+		modules: [SRC_DIR, MODULES_DIR]
 	},
 	devtool: 'source-map',
 	module: {
 		rules: [{
 			test: /\.js$/,
-			exclude: [ /node_modules/, new RegExp(`${APP_DIR}/vendor`) ],
+			exclude: [/node_modules/, new RegExp(`${SRC_DIR}/vendor`)],
 			use: [
 				{ loader: 'babel-loader' },
 				{ loader: 'eslint-loader' }
@@ -75,8 +74,7 @@ const config = {
 		}, {
 			test: /\.(png|jpg)$/,
 			loader: 'url-loader'
-		}
-	]
+		}]
 	},
 	plugins: plugins
 };

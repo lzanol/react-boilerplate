@@ -26,7 +26,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.24.4",
     "css-loader": "^0.28.6",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -51,7 +51,9 @@
     "yargs": "^10.1.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "subtitle": "^1.2.0"
   }
 }
